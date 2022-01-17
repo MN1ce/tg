@@ -90,8 +90,8 @@
   "# Feel free to put something here\n"
 
 int bot_mode;
-int verbosity;
-int msg_num_mode;
+int m_verbosity;
+int m_msg_num_mode;
 char *default_username;
 char *config_filename;
 char *prefix;
@@ -107,7 +107,7 @@ int binlog_enabled;
 extern int log_level;
 int sync_from_start;
 int allow_weak_random;
-int disable_colors;
+int m_disable_colors;
 int readline_disabled;
 int disable_output;
 int reset_authorization;
@@ -119,8 +119,8 @@ int disable_link_preview;
 int enable_json;
 int alert_sound;
 int exit_code;
-int permanent_msg_id_mode;
-int permanent_peer_id_mode;
+int m_permanent_msg_id_mode;
+int m_permanent_peer_id_mode;
 char *home_directory;
 
 struct tgl_state *TLS;
@@ -355,9 +355,9 @@ void parse_config (void) {
   config_lookup_int (&conf, buf, (void *)&t);
   log_level = t;
   
-  if (!msg_num_mode) {
+  if (!m_msg_num_mode) {
     strcpy (buf + l, "msg_num");
-    config_lookup_bool (&conf, buf, &msg_num_mode);
+    config_lookup_bool (&conf, buf, &m_msg_num_mode);
   }
 
   parse_config_val (&conf, &config_directory, "config_directory", CONFIG_DIRECTORY, 0);
@@ -505,9 +505,9 @@ void usage (void) {
 char *log_net_file;
 FILE *log_net_f;
 
-int register_mode;
-int disable_auto_accept;
-int wait_dialog_list;
+int m_register_mode;
+int m_disable_auto_accept;
+int m_wait_dialog_list;
 
 char *logname;
 int daemonize=0;
@@ -691,10 +691,10 @@ void args_parse (int argc, char **argv) {
       break;
     case 'v':
       tgl_incr_verbosity (TLS);
-      verbosity ++;
+      m_verbosity ++;
       break;
     case 'N':
-      msg_num_mode ++;
+      m_msg_num_mode ++;
       break;
 #ifdef HAVE_LIBCONFIG
     case 'c':
@@ -718,7 +718,7 @@ void args_parse (int argc, char **argv) {
       sync_from_start = 1;
       break;
     case 'E':
-      disable_auto_accept = 1;
+      m_disable_auto_accept = 1;
       break;
     case 'w':
       allow_weak_random = 1;
@@ -729,7 +729,7 @@ void args_parse (int argc, char **argv) {
       break;
 #endif
     case 'W':
-      wait_dialog_list = 1;
+      m_wait_dialog_list = 1;
       break;
 #ifdef USE_PYTHON
     case 'Z':
@@ -737,7 +737,7 @@ void args_parse (int argc, char **argv) {
       break;
 #endif
     case 'C':
-      disable_colors ++;
+      m_disable_colors ++;
       break;
     case 'R':
       readline_disabled ++;
@@ -785,10 +785,10 @@ void args_parse (int argc, char **argv) {
       enable_json = 1;
       break;
     case 1004:
-      permanent_msg_id_mode = 1;
+      m_permanent_msg_id_mode = 1;
       break;
     case 1005:
-      permanent_peer_id_mode = 1;
+      m_permanent_peer_id_mode = 1;
       break;
     case 'h':
     default:
